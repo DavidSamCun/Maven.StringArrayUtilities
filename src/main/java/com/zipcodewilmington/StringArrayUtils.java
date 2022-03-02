@@ -1,6 +1,7 @@
 package com.zipcodewilmington;
 
 import java.sql.Array;
+import java.util.ArrayList; //Imported for learning
 import java.util.Arrays;
 
 /**
@@ -72,21 +73,33 @@ public class StringArrayUtils {
 //        }
 
         return output;
-    }
+    }   //Done
 
     /**
      * @param array array of String objects
      * @return true if the order of the array is the same backwards and forwards
      */ // TODO
     public static boolean isPalindromic(String[] array) {
-        return false;
-    }
+        boolean palindromic = true;
+        String[] reverse = StringArrayUtils.reverse(array); //reverse array first
+
+        for (int i = 0; i < array.length ; i++) {
+            if (array[i] != reverse[i]) {
+                palindromic = false;
+                break;
+            }
+        }
+
+        return palindromic;
+    }   //Done
 
     /**
      * @param array array of String objects
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
+
+        ArrayList<String> =
         return false;
     }
 
@@ -96,8 +109,15 @@ public class StringArrayUtils {
      * @return number of occurrences the specified `value` has occurred
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
-        return 0;
-    }
+        int occurs = 0;
+
+        for (String test: array){
+            if(test.equals(value)){
+                occurs++;
+            }
+        }
+        return occurs;
+    }   //Done
 
     /**
      * @param array         array of String objects
@@ -105,6 +125,7 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
+
         return null;
     }
 
