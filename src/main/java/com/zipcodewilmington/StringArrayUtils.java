@@ -1,5 +1,8 @@
 package com.zipcodewilmington;
 
+import java.sql.Array;
+import java.util.Arrays;
+
 /**
  * Created by leon on 1/29/18.
  */
@@ -9,8 +12,9 @@ public class StringArrayUtils {
      * @return first element of specified array
      */ // TODO
     public static String getFirstElement(String[] array) {
+
         return array[0];
-    }
+    }   //Done
 
     /**
      * @param array array of String objects
@@ -18,23 +22,23 @@ public class StringArrayUtils {
      */
     public static String getSecondElement(String[] array) {
         return array[1];
-    }
+    }   //Done
 
     /**
      * @param array array of String objects
      * @return last element in specified array
      */ // TODO
     public static String getLastElement(String[] array) {
-        return null;
-    }
+        return array[array.length-1];
+    }   //Done
 
     /**
      * @param array array of String objects
      * @return second to last element in specified array
      */ // TODO
     public static String getSecondToLastElement(String[] array) {
-        return null;
-    }
+        return array[array.length -2];
+    }   //Done
 
     /**
      * @param array array of String objects
@@ -42,15 +46,32 @@ public class StringArrayUtils {
      * @return true if the array contains the specified `value`
      */ // TODO
     public static boolean contains(String[] array, String value) {
-        return false;
-    }
+        return Arrays.asList(array).contains(value);
+    }   //DONE
 
     /**
      * @param array of String objects
      * @return an array with identical contents in reverse order
      */ // TODO
     public static String[] reverse(String[] array) {
-        return null;
+        //Array.copyOf(array, array.length) //does not work. only copies
+        String[] output = new String[array.length];
+
+
+        System.out.println(array.length);         //Attempt 2
+        int i = 0;
+        for (String input : array) {
+            output[i] = array[array.length - 1 - i];
+            i++;
+        }
+
+//        for( int i = 0; i < array.length; i++){    //Attempt 1
+//            output[i] = array[array.length -1 - i];
+//            System.out.println(array[i]);
+//            System.out.println(output[i]);
+//        }
+
+        return output;
     }
 
     /**
