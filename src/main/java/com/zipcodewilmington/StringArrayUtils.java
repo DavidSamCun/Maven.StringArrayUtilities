@@ -99,7 +99,8 @@ public class StringArrayUtils {
      */ // TODO
     public static boolean isPangramic(String[] array) {
 
-        ArrayList<String> =
+        ArrayList<String> output = new ArrayList<>();
+
         return false;
     }
 
@@ -126,7 +127,49 @@ public class StringArrayUtils {
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
 
-        return null;
+        //ArrayList<String> output2 = new ArrayList<>();
+        //output2 = ArrayList(array);
+
+
+        String[] copy = new String[array.length];
+        int arraylength = array.length;
+        int spot = 0;
+        int z = 0;
+        int j = 0;  //remove count
+        for ( int i = 0; i < array.length-j; i++) {
+            if (valueToRemove.equals(array[i])){ //Move to last if equal
+                spot = array.length - 1 - i;
+                copy[spot] = array[i];
+                copy[i] = array [ i + 1];
+                j++;
+                z++;
+                System.out.println("Array index for this is at interation "+ z +" at " + spot + " is " + copy[array.length - 1 -i]);
+                z++;
+            } else if (!valueToRemove.equals(array[i])) {      //Copy if not equal
+               copy[i] = array[i +j];
+                System.out.println("Array index for this is at interation "+ z +" at " + i + " is " + copy[i]);
+                z++;
+            }
+
+
+//            (!valueToRemove.equals(array[i])) {      //Copy if not equal
+//                copy[i] = array[i];
+//                System.out.println(copy[i]);
+//            } else if (valueToRemove.equals(array[i])){
+//            output[i]=array[i + j];
+//            i++;
+//            j++;
+//            System.out.println(output[i]);
+//            }
+        }
+        for ( int i = 0; i < array.length; i++){
+            System.out.println(copy[i]);
+        }
+
+        String[] output = new String[arraylength -1 - j];
+        output = Arrays.copyOfRange(copy, 0, array.length - j);
+
+        return output;
     }
 
     /**
