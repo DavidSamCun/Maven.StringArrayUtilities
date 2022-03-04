@@ -48,7 +48,14 @@ public class StringArrayUtils {
      * @return true if the array contains the specified `value`
      */ // TODO
     public static boolean contains(String[] array, String value) {
-        return Arrays.asList(array).contains(value);
+
+        for ( int i = 0; i < array.length; i ++){
+            if(array[i].equals(value)){
+                return true;
+            }
+        }
+        return false;
+        //return Arrays.asList(array).contains(value);
     }   //DONE
 
     /**
@@ -137,11 +144,10 @@ public class StringArrayUtils {
     public static String[] removeValue(String[] array, String valueToRemove) {
 
         String[] copy = new String[array.length];
-        int arraylength = array.length;
         int spot = 0;
         int j = 0;  //remove count
         for ( int i = 0; i < array.length-j; i++) {
-            if (valueToRemove.equals(array[i])){ //Move to last if equal
+            if (valueToRemove.equals(array[i])){                //Move to last if equal
                 spot = array.length - 1 - i;
                 copy[spot] = array[i];
                 copy[i] = array [ i + 1];
@@ -149,17 +155,11 @@ public class StringArrayUtils {
             } else if (!valueToRemove.equals(array[i])) {      //Copy if not equal
                copy[i] = array[i +j];
             }
-
         }
-        for ( int i = 0; i < array.length; i++){
-            System.out.println(copy[i]);
-        }
-
-        String[] output = new String[arraylength -1 - j];
+        String[] output = new String[array.length -1 - j];
         output = Arrays.copyOfRange(copy, 0, array.length - j);
-
         return output;
-    }
+    } //Done
 
     /**
      * @param array array of chars
@@ -170,22 +170,19 @@ public class StringArrayUtils {
         String[] hold = new String[array.length];
         int j = 0;
 
-        hold[0] = array[0];
-
         for (int i = 0; i < array.length; i++) {
-            hold[j] = array[j];
-            while (array[i].equals(array[i+1])) {
-//                if((i+1)> array.length)
-                hold[j] += array[i + 1];
+            hold[j] = array[i];
+            while(i + 1 < array.length && hold[j].equals(array[i+1])){
+                hold[j] = array[i];
                 i++;
-//                if((i+1)> array.length){
-//                    break;
-//                }
             }
-            System.out.println(hold[j]);
+            System.out.println(hold[j]);                                  //once it stops matching, move to next index j for hold array
             j++;
         }
-            return array;
+        String[] output = new String[j];
+        output = Arrays.copyOfRange(hold, 0, j);                      //Copy values to output array
+
+            return output;
         }
 
     /**
