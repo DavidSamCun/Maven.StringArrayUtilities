@@ -3,6 +3,7 @@ package com.zipcodewilmington;
 import java.sql.Array;
 import java.util.ArrayList; //Imported for learning
 import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * Created by leon on 1/29/18.
@@ -66,12 +67,6 @@ public class StringArrayUtils {
             i++;
         }
 
-//        for( int i = 0; i < array.length; i++){    //Attempt 1
-//            output[i] = array[array.length -1 - i];
-//            System.out.println(array[i]);
-//            System.out.println(output[i]);
-//        }
-
         return output;
     }   //Done
 
@@ -82,14 +77,12 @@ public class StringArrayUtils {
     public static boolean isPalindromic(String[] array) {
         boolean palindromic = true;
         String[] reverse = StringArrayUtils.reverse(array); //reverse array first
-
         for (int i = 0; i < array.length ; i++) {
             if (array[i] != reverse[i]) {
                 palindromic = false;
                 break;
             }
         }
-
         return palindromic;
     }   //Done
 
@@ -98,10 +91,26 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        String oneword = "";
+        boolean[] lettertrue = new boolean[26];
+        for (int i = 0; i < array.length; i++){
+            oneword += array[i];
+        }
+        oneword = oneword.replace(" ", "");
+        oneword = oneword.toLowerCase(Locale.ROOT);
+        System.out.println(oneword);
 
-        ArrayList<String> output = new ArrayList<>();
+        for (int i = 0; i < oneword.length(); i++){
+                int letter = oneword.charAt(i) - 'a';
+                lettertrue[letter] = true;
+        }
 
-        return false;
+        for (int i = 0; i< 26; i++){
+            if(!lettertrue[i])
+                return false;
+        }
+        return true;
     }
 
     /**
@@ -127,14 +136,9 @@ public class StringArrayUtils {
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
 
-        //ArrayList<String> output2 = new ArrayList<>();
-        //output2 = ArrayList(array);
-
-
         String[] copy = new String[array.length];
         int arraylength = array.length;
         int spot = 0;
-        int z = 0;
         int j = 0;  //remove count
         for ( int i = 0; i < array.length-j; i++) {
             if (valueToRemove.equals(array[i])){ //Move to last if equal
@@ -142,25 +146,10 @@ public class StringArrayUtils {
                 copy[spot] = array[i];
                 copy[i] = array [ i + 1];
                 j++;
-                z++;
-                System.out.println("Array index for this is at interation "+ z +" at " + spot + " is " + copy[array.length - 1 -i]);
-                z++;
             } else if (!valueToRemove.equals(array[i])) {      //Copy if not equal
                copy[i] = array[i +j];
-                System.out.println("Array index for this is at interation "+ z +" at " + i + " is " + copy[i]);
-                z++;
             }
 
-
-//            (!valueToRemove.equals(array[i])) {      //Copy if not equal
-//                copy[i] = array[i];
-//                System.out.println(copy[i]);
-//            } else if (valueToRemove.equals(array[i])){
-//            output[i]=array[i + j];
-//            i++;
-//            j++;
-//            System.out.println(output[i]);
-//            }
         }
         for ( int i = 0; i < array.length; i++){
             System.out.println(copy[i]);
@@ -177,16 +166,51 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-        return null;
-    }
+
+        String[] hold = new String[array.length];
+        int j = 0;
+
+        hold[0] = array[0];
+
+        for (int i = 0; i < array.length; i++) {
+            hold[j] = array[j];
+            while (array[i].equals(array[i+1])) {
+//                if((i+1)> array.length)
+                hold[j] += array[i + 1];
+                i++;
+//                if((i+1)> array.length){
+//                    break;
+//                }
+            }
+            System.out.println(hold[j]);
+            j++;
+        }
+            return array;
+        }
 
     /**
      * @param array array of chars
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
-    }
+
+        String[] hold = new String[array.length];           //Declare hold array
+        int j = 0;                                          //Position of hold array
+
+        for (int i = 0; i < array.length; i++) {
+            hold[j] = array[i];                                             //Hold the first value
+            while (i + 1 < array.length && array[i].equals(array[i+1]) ) {  //If first condition is true, compare index i and i+1
+                hold[j] += array[i + 1];                                    //concatonate String if same
+                i++;                                                        //move to next array[i] index
+                }
+            //System.out.println(hold[j]);                                  //once it stops matching, move to next index j for hold array
+            j++;
+        }
+        String[] output = new String[j];
+        output = Arrays.copyOfRange(hold, 0, j);                      //Copy values to output array
+
+        return output;
+    }   //Done
 
 
 }
