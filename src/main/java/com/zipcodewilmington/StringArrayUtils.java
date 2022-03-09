@@ -98,22 +98,21 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-        String alphabet = "abcdefghijklmnopqrstuvwxyz";
         String oneword = "";
-        boolean[] lettertrue = new boolean[26];
-        for (int i = 0; i < array.length; i++){
+        boolean[] lettertrue = new boolean[26];     //True false for each letter abcdefghijklmnopqrstuvwxyz
+        for (int i = 0; i < array.length; i++){     //create single string from the string array
             oneword += array[i];
         }
-        oneword = oneword.replace(" ", "");
-        oneword = oneword.toLowerCase(Locale.ROOT);
+        oneword = oneword.replace(" ", ""); //remove spaces
+        oneword = oneword.toLowerCase(Locale.ROOT);             //lowercase all
         System.out.println(oneword);
 
-        for (int i = 0; i < oneword.length(); i++){
-                int letter = oneword.charAt(i) - 'a';
-                lettertrue[letter] = true;
+        for (int i = 0; i < oneword.length(); i++){         //array to go through all the characters
+                int letter = oneword.charAt(i) - 'a';       //set true depending on which letter minus a was seen
+                lettertrue[letter] = true;                  //
         }
 
-        for (int i = 0; i< 26; i++){
+        for (int i = 0; i< 26; i++){                        //if any of them are false, return false
             if(!lettertrue[i])
                 return false;
         }
@@ -144,12 +143,12 @@ public class StringArrayUtils {
     public static String[] removeValue(String[] array, String valueToRemove) {
 
         String[] copy = new String[array.length];
+
         int spot = 0;
         int j = 0;  //remove count
         for ( int i = 0; i < array.length-j; i++) {
             if (valueToRemove.equals(array[i])){                //Move to last if equal
-                spot = array.length - 1 - i;
-                copy[spot] = array[i];
+                copy[array.length - 1 - i] = array[i];
                 copy[i] = array [ i + 1];
                 j++;
             } else if (!valueToRemove.equals(array[i])) {      //Copy if not equal
@@ -159,6 +158,7 @@ public class StringArrayUtils {
         String[] output = new String[array.length -1 - j];
         output = Arrays.copyOfRange(copy, 0, array.length - j);
         return output;
+
     } //Done
 
     /**
@@ -176,14 +176,14 @@ public class StringArrayUtils {
                 hold[j] = array[i];
                 i++;
             }
-            System.out.println(hold[j]);                                  //once it stops matching, move to next index j for hold array
+            //System.out.println(hold[j]);                                        //once it stops matching, move to next index j for hold array
             j++;
         }
         String[] output = new String[j];
-        output = Arrays.copyOfRange(hold, 0, j);                      //Copy values to output array
+        output = Arrays.copyOfRange(hold, 0, j);                        //Copy values to output array
 
             return output;
-        }
+        } //Done
 
     /**
      * @param array array of chars
@@ -203,11 +203,12 @@ public class StringArrayUtils {
             //System.out.println(hold[j]);                                  //once it stops matching, move to next index j for hold array
             j++;
         }
+
         String[] output = new String[j];
         output = Arrays.copyOfRange(hold, 0, j);                      //Copy values to output array
 
         return output;
     }   //Done
 
-
+        //else if (i = array.length - 2  && !array[i-1].equals(array[i]) && array[i].equals(array[i+1]))
 }
